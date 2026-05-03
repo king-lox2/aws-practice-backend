@@ -37,6 +37,10 @@ app.use("/api/order", orderRouter);
 app.use(errorHandler);
 app.use(notFound);
 
+app.get('/', (req, res) => {
+    res.send('Hello World, from Kingzy');
+})
+
 const start = async () => {
   try {
     await connectDB(process.env.MONG0_URI);
