@@ -32,5 +32,5 @@ jobs:
         run: docker rm -f nodejs-app-container || true
 
       - name: Run Docker Container
-        run: docker run -d -p 4000:4000 --name nodejs-app-container -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' everistben/nodejs-app
+        run: docker run -d -p 4000:4000 --name nodejs-app-container -e MONGO_URI='${{ secrets.MONGO_URI }}' everistben/nodejs-app
         
