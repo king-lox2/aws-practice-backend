@@ -7,7 +7,8 @@ dotenv.config();
 import "express-async-errors";
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
+
 
 // db import
 import connectDB from "./connectdb/connectdb.js";
@@ -39,7 +40,7 @@ app.use(notFound);
 const start = async () => {
   try {
     await connectDB(process.env.MONG0_URI);
-    app.listen(port, console.log(`Server Started on http://localhost:${port}`));
+    app.listen(port, console.log(`Server Started`));
   } catch (error) {
     console.log(error);
   }
