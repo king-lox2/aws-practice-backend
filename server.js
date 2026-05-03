@@ -26,6 +26,10 @@ import notFound from "./middlewares/not-found.js";
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.send('Hello World, from Kingzy');
+})
+
 // api endpoints
 app.use("/api/store", storeRouter);
 app.use("/images", express.static("uploads"));
@@ -37,13 +41,11 @@ app.use("/api/order", orderRouter);
 app.use(errorHandler);
 app.use(notFound);
 
-app.get('/', (req, res) => {
-    res.send('Hello World, from Kingzy');
-})
+
 
 const start = async () => {
   try {
-    await connectDB(process.env.MONG0_URI);
+    await connectDB(process.env.MONGO_URI);
     app.listen(port, console.log(`Server Started`));
   } catch (error) {
     console.log(error);
