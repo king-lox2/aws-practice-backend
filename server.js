@@ -38,8 +38,8 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
 // keep below api endpoints always
-app.use(errorHandler);
 app.use(notFound);
+app.use(errorHandler);
 
 
 
