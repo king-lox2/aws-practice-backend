@@ -16,7 +16,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t everistben/nodejs-app .
+        run: docker build -t everistben/nodejs-app:latest .
 
       - name: Publish Image to Docker Hub
         run: docker push everistben/nodejs-app:latest
@@ -25,6 +25,13 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+      - name: Free disk space (CRITICAL FIX)
+        run: |
+          docker system prune -a -f
+          docker volume prune -f
+          rm -rf /home/ubuntu/actions-runner-node/_work/*
+          rm -rf /home/ubuntu/actions-runner-node/_diag/*
+
       - name: Pull image from Docker Hub
         run: docker pull everistben/nodejs-app:latest
 
@@ -40,4 +47,4 @@ jobs:
           -e EXPR_DEAD='${{ secrets.EXPR_DEAD }}' \
           -e FRONTEND_URL='${{ secrets.FRONTEND_URL }}' \
           -e STRIPE_SECRET_KEY='${{ secrets.STRIPE_SECRET_KEY }}' \
-          everistben/nodejs-app
+          everistben/nodejs-app:latest
