@@ -38,4 +38,6 @@ jobs:
           -e MONGO_URI='${{ secrets.MONGO_URI }}' \
           -e JWT_CONFI='${{ secrets.JWT_CONFI }}' \
           -e EXPR_DEAD='${{ secrets.EXPR_DEAD }}' \
+          -e FRONTEND_URL='${{ secrets.FRONTEND_URL }}' \
+          -e STRIPE_SECRET_KEY='${{ secrets.STRIPE_SECRET_KEY }}' \
           everistben/nodejs-app
